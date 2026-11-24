@@ -1,0 +1,49 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+package "pacto" {
+ class Main
+ class ConsoleJogo
+ class Participante {
+  - nome : String
+  - patente : String
+  - pontosDeInfluencia : int
+  + somarInfluencia(int) : void
+  + promover() : boolean
+  + getNivel() : int
+ }
+ class Assentamento {
+  - nome : String
+  - florins : int
+  - hectares : int
+  - graos : int
+  - habitantes : int
+  - guardas : int
+  - edificios : int
+  - imposto : int
+  - ano : int
+  + pagar(int) : boolean
+  + receber(int) : void
+  + iniciarNovoAno() : void
+  + exibirPainel() : void
+ }
+ class Safra { + colher(Assentamento) : int + abastecer(Assentamento,int) : boolean }
+ class BolsaDeTrocas { - precoGrao : int + comprarGraos(Assentamento,int) : boolean + venderGraos(Assentamento,int) : boolean + atualizarMercado(int) : void }
+ class Conselho { + recolherTributo(Assentamento) : int + alterarTaxa(Assentamento,int) : boolean }
+ class ObrasDoConselho { + erguerEdificio(Assentamento) : boolean + formarGuarda(Assentamento,int) : boolean }
+ class Temporada { - participantes : List<Assentamento> - vez : int + inscrever(Assentamento) : boolean + avancarVez() : boolean + fecharAno() : void + apontarVencedor() : Assentamento }
+ Main ..> Temporada
+ Main ..> ConsoleJogo
+ ConsoleJogo --> Temporada
+ ConsoleJogo ..> Safra
+ ConsoleJogo ..> BolsaDeTrocas
+ ConsoleJogo ..> Conselho
+ ConsoleJogo ..> ObrasDoConselho
+ Assentamento "1" --> "1" Participante : responsável
+ Temporada "1" o-- "2..4" Assentamento
+ Safra ..> Assentamento
+ BolsaDeTrocas ..> Assentamento
+ Conselho ..> Assentamento
+ ObrasDoConselho ..> Assentamento
+}
+@enduml

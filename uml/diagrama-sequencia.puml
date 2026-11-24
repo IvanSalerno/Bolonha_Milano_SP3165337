@@ -1,0 +1,23 @@
+@startuml
+actor Participante
+participant ConsoleJogo
+participant Temporada
+participant Assentamento
+participant Safra
+participant BolsaDeTrocas
+Participante -> ConsoleJogo : escolhe ação
+ConsoleJogo -> Temporada : getAssentamentoDaVez()
+Temporada --> ConsoleJogo : assentamento atual
+alt ação agrícola
+ ConsoleJogo -> Safra : colher(assentamento)
+ Safra -> Assentamento : consultar estoque e habitantes
+ Safra -> Assentamento : atualizar grãos e marcar safra
+ Safra --> ConsoleJogo : resultado da colheita
+else ação comercial
+ ConsoleJogo -> BolsaDeTrocas : comprarGraos(assentamento, qtd)
+ BolsaDeTrocas -> Assentamento : pagar(custo)
+ BolsaDeTrocas -> Assentamento : guardarGraos(qtd)
+ BolsaDeTrocas --> ConsoleJogo : confirmação
+end
+ConsoleJogo --> Participante : apresenta resultado e painel
+@enduml

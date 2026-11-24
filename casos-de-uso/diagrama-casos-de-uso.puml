@@ -1,0 +1,30 @@
+@startuml
+left to right direction
+actor "Participante" as P
+rectangle "Pacto das Duas Cidades" {
+ usecase "Configurar partida" as U1
+ usecase "Consultar painel do assentamento" as U2
+ usecase "Realizar colheita" as U3
+ usecase "Abastecer habitantes" as U4
+ usecase "Comprar grãos" as U5
+ usecase "Vender grãos" as U6
+ usecase "Definir tributo" as U7
+ usecase "Recolher tributo" as U8
+ usecase "Construir edifício" as U9
+ usecase "Formar guarda" as U10
+ usecase "Passar a vez" as U11
+ usecase "Consultar resultado" as U12
+}
+P --> U1
+P --> U2
+P --> U3
+P --> U4
+P --> U5
+P --> U6
+P --> U7
+P --> U8
+P --> U9
+P --> U10
+P --> U11
+P --> U12
+@enduml
